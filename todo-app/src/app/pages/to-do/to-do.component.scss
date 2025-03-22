@@ -1,0 +1,9 @@
+.text-decoration-line-through {
+    text-decoration: line-through;
+    color: #6c757d;  // Optional: make the completed text look like faded/disabled text
+  }
+  
+  .form-check-input:checked {
+    background-color: #28a745;  // Green color for checked items
+    border-color: #28a745;
+  }

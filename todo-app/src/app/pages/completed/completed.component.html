@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="card" *ngFor="let item of completedTodos; trackBy: trackById">
+      <div class="card-body">
+        <h5 class="card-title">{{ item?.title }}</h5>
+        <p class="card-text">{{ item?.description }}</p>    
+        <i class="bi bi-trash3 text-danger" role="button" (click)="removeCompletedItem(item.id)"></i>
+      </div>
+      
+    </div>      
+  </div>
+  

@@ -1,0 +1,31 @@
+<div class="container">
+    <div *ngIf="addedTodoListItems.length === 0" class="no-tasks-message text-center">
+        <p>No tasks available. Please add a task.</p>
+      </div>
+    <div class="card" *ngFor="let item of addedTodoListItems; trackBy: trackById">
+      <div class="card-body">
+        <input 
+        type="checkbox" 
+        [(ngModel)]="item.completed" 
+        (change)="completeToDoItem(item.id)" 
+        class="form-check-input" 
+        [checked]="item.completed" />
+        <!-- Title and Description for Display -->
+        <h5 class="card-title" *ngIf="!item.isEditing">{{ item?.title }}</h5>
+        <input *ngIf="item.isEditing" [(ngModel)]="item.title" class="form-control" />
+  
+        <p class="card-text" *ngIf="!item.isEditing">{{ item?.description }}</p>
+        <textarea *ngIf="item.isEditing" [(ngModel)]="item.description" class="form-control"></textarea>
+  
+        <!-- Edit & Delete Icons -->
+        <i class="bi bi-trash3 text-danger" role="button" (click)="removeToDoItem(item.id)"></i>
+        
+        <!-- Edit Icon - Toggles edit mode -->
+        <i class="bi bi-pencil-square main_theme_color" role="button" (click)="editToDoItem(item.id)"></i>
+  
+        <!-- Save Icon - Save the changes -->
+        <i *ngIf="item.isEditing" class="bi bi-check-circle main_theme_color" role="button" (click)="saveToDoItem(item.id, item.title, item.description)"></i>
+      </div>
+    </div>      
+  </div>
+  

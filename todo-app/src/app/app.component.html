@@ -1,0 +1,34 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="www.terralogic.com">
+    <img class="main_logo" [src]="company_logo_url" alt="Terralogic Logo" >
+  </a>
+</nav>
+
+<div class="container">
+  <p class="todo-heading text-center mt-2">My Todos</p>
+  <div class="card">
+    <div class="card-body">
+      <!-- Add to-do list section -->
+      <div class="d-flex flex-column flex-md-row">
+        <div class="col-12 col-md-4 mb-3 mb-md-0">
+          <input type="text" class="form-control add_list_inputs" placeholder="Enter Title" [(ngModel)]="todo_title">
+        </div>
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+          <textarea class="form-control description_class add_list_inputs" placeholder="Enter Description" [(ngModel)]="todo_description"></textarea>
+        </div>
+        <div class="col-12 col-md-2 mb-3 mb-md-0">
+          <button mat-raised-button class="todo_btn" (click)="addToDoItem()">Add Todo</button>
+        </div>
+      </div>
+      <!-- To-do & Completed list section -->
+      <mat-tab-group animationDuration="0ms" class="mt-2">
+        <mat-tab label="To Do">
+          <app-to-do></app-to-do>
+        </mat-tab>
+        <mat-tab label="Completed">
+          <app-completed></app-completed>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
