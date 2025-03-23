@@ -8,7 +8,7 @@
         <!-- Row for Checkbox, Title & Icons -->
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
-            <input type="checkbox" [(ngModel)]="item.completed" (change)="completeToDoItem($event, item.id)" class="me-2" [checked]="item.completed" />
+            <input type="checkbox" title="Mark As Completed" role="button" [(ngModel)]="item.completed" (change)="completeToDoItem($event, item.id)" class="me-2" [checked]="item.completed" />
             <h5 class="card-title todo_title m-0" *ngIf="!item.isEditing">{{ item?.title | uppercase}} </h5>
           </div>
         </div>
