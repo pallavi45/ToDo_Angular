@@ -1,31 +1,53 @@
-<div class="container">
-    <div *ngIf="addedTodoListItems.length === 0" class="no-tasks-message text-center">
-        <p>No tasks available. Please add a task.</p>
-      </div>
-    <div class="card" *ngFor="let item of addedTodoListItems; trackBy: trackById">
-      <div class="card-body">
-        <input 
-        type="checkbox" 
-        [(ngModel)]="item.completed" 
-        (change)="completeToDoItem(item.id)" 
-        class="form-check-input" 
-        [checked]="item.completed" />
-        <!-- Title and Description for Display -->
-        <h5 class="card-title" *ngIf="!item.isEditing">{{ item?.title }}</h5>
-        <input *ngIf="item.isEditing" [(ngModel)]="item.title" class="form-control" />
-  
-        <p class="card-text" *ngIf="!item.isEditing">{{ item?.description }}</p>
-        <textarea *ngIf="item.isEditing" [(ngModel)]="item.description" class="form-control"></textarea>
-  
-        <!-- Edit & Delete Icons -->
-        <i class="bi bi-trash3 text-danger" role="button" (click)="removeToDoItem(item.id)"></i>
-        
-        <!-- Edit Icon - Toggles edit mode -->
-        <i class="bi bi-pencil-square main_theme_color" role="button" (click)="editToDoItem(item.id)"></i>
-  
-        <!-- Save Icon - Save the changes -->
-        <i *ngIf="item.isEditing" class="bi bi-check-circle main_theme_color" role="button" (click)="saveToDoItem(item.id, item.title, item.description)"></i>
-      </div>
-    </div>      
+<div class="container mt-5">
+  <div *ngIf="addedTodoListItems.length === 0" class="no-tasks-message text-center">
+    <p class="label-class">You're all set! Add a task to stay productive.</p>
   </div>
-  
+  <div class="card mb-3" *ngFor="let item of addedTodoListItems; trackBy: trackById">
+    <div class="card-body d-flex justify-content-between mt-2">
+      <div class="d-flex flex-column p-2">
+        <!-- Row for Checkbox, Title & Icons -->
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <input type="checkbox" [(ngModel)]="item.completed" (change)="completeToDoItem($event, item.id)" class="me-2" [checked]="item.completed" />
+            <h5 class="card-title todo_title m-0" *ngIf="!item.isEditing">{{ item?.title | uppercase}} </h5>
+          </div>
+        </div>
+        <!-- Description-->
+        <div class="mt-1">
+          <p class="card-text todo_description mt-1" *ngIf="!item.isEditing">{{ item?.description }}</p>
+        </div>
+      </div>
+      <!--Edit & Delete Icons -->
+      <div class="d-flex">
+        <i class="bi bi-pencil-square main_theme_color mx-2" role="button" title="Edit Todo Item" (click)="openEditModal(editToDoItemModal,item)"></i>
+        <i *ngIf="item.isEditing" class="bi bi-check-circle main_theme_color mx-2" role="button" 
+          (click)="saveToDoItem(item.id, item.title, item.description)"></i>
+        <i class="bi bi-trash3 text-danger mx-2" role="button" title="Delete Todo Item" (click)="removeToDoItem(item.id)"></i>
+      </div>   
+    </div>
+  </div>
+</div>
+
+<ng-template #editToDoItemModal let-modal>
+  <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editTodoModalLabel">Edit ToDo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input type="text" class="form-control task-input-container" [(ngModel)]="selectedItem.title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea class="form-control task-input-container description" [(ngModel)]="selectedItem.description"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button mat-raised-button class="todo_btn" type="submit" (click)="updateToDoItem()"> Update Item</button>
+      </div>
+  </div>
+
+</ng-template>

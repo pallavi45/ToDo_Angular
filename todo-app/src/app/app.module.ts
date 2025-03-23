@@ -7,9 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
-import { PagesModule } from './pages/pages.module';
 import { ToDoComponent } from './pages/to-do/to-do.component';
 import { CompletedComponent } from './pages/completed/completed.component';
+import { MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { CompletedComponent } from './pages/completed/completed.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatTabsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

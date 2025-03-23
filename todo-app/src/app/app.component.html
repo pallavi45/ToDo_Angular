@@ -1,31 +1,49 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-light sticky-top">
   <a class="navbar-brand" href="www.terralogic.com">
-    <img class="main_logo" [src]="company_logo_url" alt="Terralogic Logo" >
+    <img class="main_logo" [src]="company_logo_url" alt="Terralogic Logo">
   </a>
+  <button mat-raised-button class="add_item_btn" type="submit" (click)="addItemModal(addtoDoItemModal)">
+    ADD TODO 
+  </button>
 </nav>
 
-<div class="container">
-  <p class="todo-heading text-center mt-2">My Todos</p>
+<div class="container mt-5">
   <div class="card">
     <div class="card-body">
-      <!-- Add to-do list section -->
-      <div class="d-flex flex-column flex-md-row">
-        <div class="col-12 col-md-4 mb-3 mb-md-0">
-          <input type="text" class="form-control add_list_inputs" placeholder="Enter Title" [(ngModel)]="todo_title">
+      <!-- Add task list modal -->
+      <ng-template #addtoDoItemModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">My Todos</h4>
+          <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
         </div>
-        <div class="col-12 col-md-6 mb-3 mb-md-0">
-          <textarea class="form-control description_class add_list_inputs" placeholder="Enter Description" [(ngModel)]="todo_description"></textarea>
+        <div class="modal-body d-flex justify-content-center">
+          <form #addtoDoItem class="w-100">
+            <div class="d-flex flex-column gap-3 w-100">
+              <!-- Title input field -->
+              <div class="mb-3 task-input-container w-100">
+                <input type="text" class="task-input w-100" placeholder="Add Title" name="title" [(ngModel)]="todo_title" required>
+              </div>
+              <!-- Description Input field -->
+              <div class="mb-3 task-input-container w-100">
+                <textarea class="task-input description w-100" placeholder="Add Description" name="description" [(ngModel)]="todo_description" required></textarea>
+              </div>
+              <!-- Submit Button -->
+              <div class="mb-3 mb-md-0 text-center">
+                <button mat-raised-button class="todo_btn" type="submit" (click)="addToDoItem()">
+                  Add Todo
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="col-12 col-md-2 mb-3 mb-md-0">
-          <button mat-raised-button class="todo_btn" (click)="addToDoItem()">Add Todo</button>
-        </div>
-      </div>
+      </ng-template>
+      
       <!-- To-do & Completed list section -->
       <mat-tab-group animationDuration="0ms" class="mt-2">
-        <mat-tab label="To Do">
+        <mat-tab label="T0 D0">
           <app-to-do></app-to-do>
         </mat-tab>
-        <mat-tab label="Completed">
+        <mat-tab label="COMPLETED">
           <app-completed></app-completed>
         </mat-tab>
       </mat-tab-group>

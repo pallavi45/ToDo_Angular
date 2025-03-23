@@ -1,6 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.main_theme_color{
-    color: #dc33a9 !important;
+:root {
+    --main_theme_color: #dc33a9;
+}
+.todo_title{
+    color: var(--main_theme_color);
+    font-size: 20px !important;
+    font-weight: 500;
+}
+.todo_description{
+    font-size: 17px !important;
+    margin-left: 18px;
+}
+input{
+    padding: 10px;
+}
+.task-input-container {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px groove #dc33a9;
+}
+.task-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;    
+    width: 100%;
+}
+.task-input-container .description{
+    height: 70px !important;
 }
