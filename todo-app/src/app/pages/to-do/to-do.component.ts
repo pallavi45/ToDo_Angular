@@ -53,7 +53,7 @@ export class ToDoComponent implements OnInit {
       if(result.dismiss){
         Swal.close();
       }else if(!result.dismiss){
-        Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 2000,text: 'Task Deleted Succesfully', icon: 'success', })
+        Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 1000,text: 'Task Deleted Succesfully', icon: 'success', })
         .then(()=>{
           this.addedTodoListItems = this.addedTodoListItems.filter(item => item.id !== id);
           localStorage.setItem('todos', JSON.stringify(this.addedTodoListItems));
@@ -100,8 +100,11 @@ export class ToDoComponent implements OnInit {
     let index = this.addedTodoListItems.findIndex(todo => todo.id === this.selectedItem.id);
     if (index !== -1) {
       this.addedTodoListItems[index] = { ...this.selectedItem };
-      this._tasksSrvc.updateTodo(this.selectedItem ); 
+      localStorage.setItem('todos', JSON.stringify(this.addedTodoListItems));
+      this._tasksSrvc.updateTodo(this.selectedItem);
     }
+  
+    // Close the modal after updating
     this.modalSrvc.dismissAll();
   }
   completeToDoItem(event:any,id: string) {
@@ -130,12 +133,15 @@ export class ToDoComponent implements OnInit {
         if(result.dismiss){
           Swal.close();
         }else if(!result.dismiss){
-          Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000,text: 'Task Completed Succesfully', icon: 'success', })
+          Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 1000,text: 'Task Completed Succesfully', icon: 'success', })
           .then(()=>{
             this._tasksSrvc.completeTodo(id); 
           })
         }
       })
     }
+  }
+  closeModal(){
+    this.modalSrvc.dismissAll()
   }
 }   
