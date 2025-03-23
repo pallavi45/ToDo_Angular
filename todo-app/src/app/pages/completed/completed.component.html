@@ -1,4 +1,7 @@
 <div class="container mt-5">
+  <div *ngIf="completedTodos.length === 0" class="no-tasks-message text-center">
+    <p class="label-class">No Completed Tasks.</p>
+  </div>
     <div class="card mb-3" *ngFor="let item of completedTodos; trackBy: trackById">
       <div class="card-body d-flex justify-content-between">
         <div>
